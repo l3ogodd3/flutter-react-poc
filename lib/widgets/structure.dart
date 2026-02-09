@@ -13,10 +13,17 @@ class Structure extends StatelessWidget {
 
   const Structure({super.key, required this.child});
 
+  int getSelectedIndex(String location) {
+    if (location == '/react') return 1;
+    if (location == '/react-objectives') return 2;
+    if (location == '/react-extract') return 3;
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.path;
-    final selectedIndex = location == '/react' ? 1 : 0;
+    final selectedIndex = getSelectedIndex(location);
 
     final List<NestedNavBarItem> items = [
       NestedNavBarItem(
@@ -27,8 +34,20 @@ class Structure extends StatelessWidget {
       ),
       NestedNavBarItem(
         onTap: (index) => context.go('/react'),
-        title: 'React',
+        title: 'React (Legacy)',
         isSelected: selectedIndex == 1,
+        icon: LucideIcons.facebook200,
+      ),
+      NestedNavBarItem(
+        onTap: (index) => context.go('/react-objectives'),
+        title: 'React Objectives',
+        isSelected: selectedIndex == 2,
+        icon: LucideIcons.facebook200,
+      ),
+      NestedNavBarItem(
+        onTap: (index) => context.go('/react-extract'),
+        title: 'React Extract',
+        isSelected: selectedIndex == 3,
         icon: LucideIcons.facebook200,
       ),
     ];

@@ -7,9 +7,7 @@ class LegacyReactPage extends StatelessWidget {
   final String url;
 
   LegacyReactPage({required this.url, super.key}) {
-    ui.platformViewRegistry.registerViewFactory('iframe-react-view', (
-      int viewId,
-    ) {
+    ui.platformViewRegistry.registerViewFactory(url, (int viewId) {
       final iframe =
           html.document.createElement('iframe') as html.HTMLIFrameElement;
 
@@ -26,6 +24,6 @@ class LegacyReactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HtmlElementView(viewType: 'iframe-react-view');
+    return HtmlElementView(viewType: url);
   }
 }
